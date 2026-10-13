@@ -1,0 +1,55 @@
+name: Feature Request
+description: Suggest a new feature
+title: "[FEATURE] Brief description"
+labels: ["enhancement"]
+
+body:
+  - type: markdown
+    attributes:
+      value: "Thanks for your feature suggestion!"
+  
+  - type: dropdown
+    id: tool
+    attributes:
+      label: Which tool?
+      options:
+        - GPS/GNSS Traveler
+        - SeedLink Monitor
+        - Both
+        - Other
+    validations:
+      required: true
+  
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: Describe the problem this feature solves
+      placeholder: "As a user, I want... because..."
+    validations:
+      required: true
+  
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: How should this feature work?
+    validations:
+      required: true
+  
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Any other approaches?
+  
+  - type: dropdown
+    id: complexity
+    attributes:
+      label: Estimated Complexity
+      options:
+        - Small (1-2 hours)
+        - Medium (1-2 days)
+        - Large (1+ week)
+    validations:
+      required: true

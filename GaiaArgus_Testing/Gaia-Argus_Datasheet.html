@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaia-Argus Datasheet — GaiaCode Limited</title>
+    <style>
+        :root {
+            --bg:       #0f172a;
+            --surface:  #1e293b;
+            --surface2: #263245;
+            --border:   #334155;
+            --teal:     #0EADB2;
+            --teal2:    #0d9da2;
+            --green:    #10b981;
+            --red:      #ef4444;
+            --amber:    #f59e0b;
+            --text:     #e2e8f0;
+            --muted:    #94a3b8;
+            --mono:     ui-monospace, 'SF Mono', Menlo, Consolas, 'Roboto Mono', monospace;
+        }
+
+        @page {
+            size: A4;
+            margin: 15mm;
+            background-color: #0f172a;
+            @bottom-right {
+                content: "Page " counter(page) " of " counter(pages);
+                font-size: 8pt;
+                color: #94a3b8;
+            }
+            @bottom-left {
+                content: "GaiaCode Limited  |  Proprietary & Confidential";
+                font-size: 8pt;
+                color: #94a3b8;
+            }
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-size: 9.5pt;
+            color: var(--text);
+            line-height: 1.55;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+        }
+
+        /* ── Header ────────────────────────────────────────────────────────── */
+        .header {
+            border-bottom: 4px solid var(--teal);
+            padding-bottom: 12px;
+            margin-bottom: 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 26pt;
+            color: var(--teal);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .header .subtitle {
+            font-size: 11pt;
+            color: var(--muted);
+            font-weight: 500;
+            margin-top: 4px;
+        }
+
+        .header .version {
+            font-size: 9pt;
+            color: var(--text);
+            text-align: right;
+            background: var(--surface);
+            padding: 6px 10px;
+            border-radius: 5px;
+            border: 1px solid var(--border);
+            line-height: 1.7;
+        }
+
+        /* ── Two-column layout ─────────────────────────────────────────────── */
+        .container {
+            display: flex;
+            gap: 22px;
+            align-items: flex-start;
+        }
+
+        .main-content { flex: 2; min-width: 0; }
+
+        .sidebar {
+            flex: 1;
+            min-width: 0;
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-top: 3px solid var(--teal);
+            padding: 16px;
+            border-radius: 8px;
+        }
+
+        /* ── Typography ────────────────────────────────────────────────────── */
+        h2 {
+            color: var(--teal);
+            font-size: 13pt;
+            margin-top: 22px;
+            margin-bottom: 10px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .main-content h2:first-child { margin-top: 0; }
+
+        h3 {
+            color: var(--text);
+            font-size: 11pt;
+            margin-top: 14px;
+            margin-bottom: 5px;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+
+        ul {
+            margin-top: 0;
+            margin-bottom: 14px;
+            padding-left: 20px;
+        }
+
+        li { margin-bottom: 4px; }
+
+        /* ── Tables ────────────────────────────────────────────────────────── */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 16px;
+            font-size: 8.5pt;
+            background-color: var(--surface);
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            border: 1px solid var(--border);
+            padding: 6px 9px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: var(--surface2);
+            color: var(--teal);
+            font-weight: 600;
+        }
+
+        /* ── Sidebar specs ─────────────────────────────────────────────────── */
+        .spec-group { margin-bottom: 16px; }
+
+        .spec-group h4 {
+            margin: 0 0 6px 0;
+            color: var(--muted);
+            font-size: 9pt;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px dotted var(--border);
+            padding-bottom: 3px;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+            font-size: 8.5pt;
+        }
+
+        .spec-label { color: var(--muted); font-weight: 500; }
+
+        .spec-value {
+            color: var(--text);
+            font-weight: 600;
+            text-align: right;
+            max-width: 62%;
+        }
+
+        /* ── Callout ───────────────────────────────────────────────────────── */
+        .callout {
+            background-color: rgba(14, 173, 178, 0.07);
+            border-left: 4px solid var(--teal);
+            padding: 10px 13px;
+            margin: 16px 0;
+            font-size: 9pt;
+            color: var(--text);
+            page-break-inside: avoid;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .callout strong {
+            color: var(--teal);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* ── Architecture ASCII box ────────────────────────────────────────── */
+        .architecture-box {
+            background-color: #020a14;
+            color: #4ade80;
+            padding: 13px;
+            border-radius: 5px;
+            border: 1px solid var(--border);
+            font-family: var(--mono);
+            font-size: 7.8pt;
+            white-space: pre;
+            margin-bottom: 16px;
+            line-height: 1.35;
+            page-break-inside: avoid;
+            overflow-x: auto;
+        }
+
+        /* ── Capability grid ───────────────────────────────────────────────── */
+        .cap-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .cap-block {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 12px;
+            page-break-inside: avoid;
+        }
+
+        .cap-block h3 {
+            margin-top: 0;
+            color: var(--teal);
+            font-size: 10.5pt;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 4px;
+        }
+
+        .cap-block ul { margin-bottom: 0; }
+
+        /* ── Badge chips ───────────────────────────────────────────────────── */
+        .badge {
+            display: inline-block;
+            font-size: 7.5pt;
+            font-weight: 600;
+            padding: 1px 6px;
+            border-radius: 3px;
+            vertical-align: middle;
+            margin-left: 4px;
+        }
+
+        .badge-teal  { background: rgba(14,173,178,0.15); color: var(--teal);  border: 1px solid rgba(14,173,178,0.35); }
+        .badge-green { background: rgba(16,185,129,0.12); color: var(--green); border: 1px solid rgba(16,185,129,0.3);  }
+        .badge-amber { background: rgba(245,158,11,0.10); color: var(--amber); border: 1px solid rgba(245,158,11,0.3);  }
+
+        /* ── Sidebar module list ───────────────────────────────────────────── */
+        .module-item {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 6px;
+            font-size: 8.5pt;
+        }
+
+        .module-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--teal);
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        .module-name { color: var(--text); font-weight: 600; }
+        .module-desc { color: var(--muted); font-size: 8pt; }
+    </style>
+</head>
+<body>
+
+    <!-- ── Header ──────────────────────────────────────────────────────────── -->
+    <div class="header">
+        <div>
+            <img src="Gaiacode.png" alt="GaiaCode Logo" style="height:38px; margin-bottom:8px; display:block;">
+            <h1>Gaia-Argus</h1>
+            <div class="subtitle">Advanced Seismic Array Console &amp; Structural Monitor</div>
+        </div>
+        <div class="version">
+            <strong>Deployment:</strong> Windows Standalone (.exe)<br>
+            <strong>Framework:</strong> Tauri v2 / Rust + Svelte 5<br>
+            <strong>Version:</strong> 0.1.0 Release
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- ── Main content ────────────────────────────────────────────────── -->
+        <div class="main-content">
+
+            <h2>System Overview</h2>
+            <p>
+                Gaia-Argus is a high-performance desktop operator console engineered for continuous
+                seismic telemetry ingestion, multi-station array management, and long-term structural
+                health monitoring (SHM). Packaged as a single, self-contained Windows executable,
+                it eliminates external runtime dependencies by bundling a compiled Rust processing
+                core, an embedded SQLite historian, and a GPU-optional visualization layer into one
+                coherent Tauri v2 binary.
+            </p>
+            <p>
+                The system is designed for deployment alongside linear sensor arrays — such as
+                those used on high-speed rail corridors — where P-wave back-azimuth triangulation,
+                velocity change monitoring, and rapid-onset event classification must operate
+                continuously without operator intervention.
+            </p>
+
+            <div class="callout">
+                <strong>Zero-Allocation Real-Time Core</strong>
+                The Rust DSP backend processes waveform data inside pre-allocated ring buffers,
+                bypassing the garbage collector entirely. Binary IPC transfers raw
+                <code>f32</code> sample arrays as flat <code>Vec&lt;u8&gt;</code> byte vectors directly to the
+                Canvas renderer — eliminating JSON serialization overhead and the associated
+                multi-second latency seen in conventional WebView architectures.
+            </div>
+
+            <h2>Core Capabilities</h2>
+            <div class="cap-grid">
+                <div class="cap-block">
+                    <h3>Hybrid Canvas Rendering Engine</h3>
+                    <ul>
+                        <li><strong>Binary IPC pipeline:</strong> Rust packs <code>f32</code> amplitudes into a flat byte buffer with a 32-byte metadata header; the JS side casts a zero-copy <code>Float32Array</code> view, no JSON pass.</li>
+                        <li><strong>Adaptive draw loop:</strong> Per-pixel min/max envelope for overview (millions of samples at full canvas width); direct <code>lineTo</code> path at zoomed scales. Transition is seamless.</li>
+                        <li><strong>DPI-aware sizing:</strong> <code>ResizeObserver</code> fires <code>devicePixelRatio</code>-corrected canvas resize; sharp rendering on 4K and HiDPI displays.</li>
+                        <li><strong>Native interactivity:</strong> Wheel zoom (cursor-anchored), left-drag pan, touch pinch/pan — all in-buffer, no round-trips to Rust.</li>
+                    </ul>
+                </div>
+
+                <div class="cap-block">
+                    <h3>3-Component Polarization Analysis</h3>
+                    <ul>
+                        <li><strong>Covariance eigen-decomposition:</strong> Sliding window (0.5 – 4 s, configurable overlap) constructs a 3×3 covariance matrix per window using <code>nalgebra::SymmetricEigen</code> (stack-allocated, zero heap).</li>
+                        <li><strong>P-wave detection:</strong> Rectilinearity R = 1 − (λ₂+λ₃)/(2λ₁); configurable threshold trigger (default R ≥ 0.75).</li>
+                        <li><strong>Back-azimuth:</strong> Derived from the principal eigenvector projected onto the horizontal plane; ±180° ambiguity resolved by the sign of the vertical component.</li>
+                        <li><strong>IPC telemetry:</strong> Throttled <code>polarization_telemetry</code> Tauri event with rectilinearity, azimuth, incidence, and eigenvalues.</li>
+                    </ul>
+                </div>
+
+                <div class="cap-block">
+                    <h3>Ambient Noise Interferometry (Δv/v)</h3>
+                    <ul>
+                        <li><strong>Preprocessing:</strong> 1-bit temporal normalisation suppresses transient earthquake spikes; spectral whitening (Hann-windowed FFT, 10-bin smoothing) equalises the spectrum for broadband coherence.</li>
+                        <li><strong>Cross-correlation:</strong> FFT-based convolution <em>A(ω)·B*(ω)</em> → IFFT → fftshift; CCF normalised to [−1, 1].</li>
+                        <li><strong>Stacking &amp; reference:</strong> Rolling 24 h / 5-day linear stack; persisted per station pair in SQLite.</li>
+                        <li><strong>Δv/v extraction:</strong> Moving Window Cross-Spectral (MWCS) analysis; weighted least-squares phase-slope fit yields δt per window → Δv/v = −δt/t.</li>
+                    </ul>
+                </div>
+
+                <div class="cap-block">
+                    <h3>HypoDD Relocation &amp; Site Characterization</h3>
+                    <ul>
+                        <li><strong>Double-difference relocation:</strong> Iterative SVD solver (<code>nalgebra::SVD</code>); 1-D Vp/Vs model (6.0/3.47 km/s); convergence at ‖Δm‖₂ &lt; 0.1 m. Results visualised as 3D Plotly modal with original/relocated marker pairs.</li>
+                        <li><strong>MASW (Vs30):</strong> Slant-stack p-τ transform + damped least-squares inversion across 128 velocity bins; Vs30 harmonic mean with NEHRP site class badge.</li>
+                        <li><strong>Interactive picking:</strong> Manual dispersion curve selection via <code>plotly_click</code> events; picked points feed directly into the inversion.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2>Software Architecture</h2>
+            <p>
+                The application follows a strict two-layer architecture: a <strong>gaia_dsp</strong> library crate
+                contains all signal processing algorithms as pure, dependency-free Rust functions;
+                the <strong>gaia-station-app</strong> Tauri crate contains thin async command adapters that
+                call into <code>gaia_dsp</code> via <code>spawn_blocking</code>, preventing any DSP work from
+                blocking the Tauri event loop or the UI thread.
+            </p>
+
+            <table>
+                <tr>
+                    <th>Subsystem</th>
+                    <th>Technology</th>
+                    <th>Role</th>
+                </tr>
+                <tr>
+                    <td><strong>DSP Library</strong></td>
+                    <td>Rust (<code>gaia_dsp</code> crate)</td>
+                    <td>Polarization, MWCS Δv/v, HypoDD SVD relocation, MASW slant-stack, F-K beamforming. Zero UI coupling. Full unit test coverage.</td>
+                </tr>
+                <tr>
+                    <td><strong>Tauri Command Layer</strong></td>
+                    <td>Rust / Tauri v2</td>
+                    <td>Async IPC bridge. Queries SQLite via <code>sqlx::SqlitePool</code>, calls <code>gaia_dsp</code> inside <code>spawn_blocking</code>, emits typed events to the frontend.</td>
+                </tr>
+                <tr>
+                    <td><strong>Visualization UI</strong></td>
+                    <td>Svelte 5 / TypeScript</td>
+                    <td>Canvas waveform engine, Plotly WebGL for spectral views, real-time reactive stores, MD3-compatible dark theme.</td>
+                </tr>
+                <tr>
+                    <td><strong>Historian</strong></td>
+                    <td>SQLite3 (embedded)</td>
+                    <td>Event catalog, phase picks, CCF stacks, Δv/v history, station metadata — all persisted locally with no external database dependency.</td>
+                </tr>
+                <tr>
+                    <td><strong>Telemetry Ingest</strong></td>
+                    <td>SeedLink TCP / miniSEED</td>
+                    <td>Live streaming via SeedLink client (configurable host:port, network/station/selector codes); offline batch ingestion of miniSEED archives and Omega directory structures.</td>
+                </tr>
+            </table>
+
+            <h2>Integration Architecture</h2>
+            <div class="architecture-box"
+>[SeedLink Stream (TCP)]   [Offline miniSEED / Omega Dir]   [Tau Datalogger (HTTP)]
+         │                           │                                  │
+         └───────────────────────────┴──────────────────────────────────┘
+                                     │
+                          ┌──────────▼──────────┐
+                          │  gaia_dsp  (Rust)   │
+                          │  ─────────────────  │
+                          │  Polarization 3-C   │
+                          │  Δv/v  (MWCS)       │
+                          │  HypoDD  (SVD)      │
+                          │  MASW   (Slant)     │
+                          │  F-K Beamforming    │
+                          └──────────┬──────────┘
+                                     │  spawn_blocking  (Tauri IPC)
+                          ┌──────────▼──────────────────────────┐
+                          │       Tauri v2 Runtime               │
+                          │  ┌──────────────┐ ┌──────────────┐  │
+                          │  │ SQLite3      │ │ Binary IPC   │  │
+                          │  │ Historian    │ │ Vec&lt;u8&gt; buf  │  │
+                          │  └──────────────┘ └──────┬───────┘  │
+                          └─────────────────────────┼───────────┘
+                                                     │
+                          ┌──────────────────────────▼──────────┐
+                          │    Svelte 5 Operator Console         │
+                          │  Canvas Waveform  │  Network Map     │
+                          │  Helicorder       │  QC Matrix       │
+                          │  Polarization     │  Event Catalog   │
+                          │  Ambient Noise    │  Site Char.      │
+                          └─────────────────────────────────────┘</div>
+
+        </div>
+
+        <!-- ── Sidebar ──────────────────────────────────────────────────────── -->
+        <div class="sidebar">
+            <h2>Technical Specifications</h2>
+
+            <div class="spec-group">
+                <h4>System Interfaces</h4>
+                <div class="spec-item">
+                    <span class="spec-label">Live Stream</span>
+                    <span class="spec-value">SeedLink (TCP, configurable host:port)</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Offline Ingest</span>
+                    <span class="spec-value">miniSEED files / Omega directory</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Datalogger UI</span>
+                    <span class="spec-value">Tau Web Interface (embedded HTTP)</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">IPC Transport</span>
+                    <span class="spec-value">Tauri v2 binary Vec&lt;u8&gt;</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Event Notifications</span>
+                    <span class="spec-value">Tauri typed IPC events</span>
+                </div>
+            </div>
+
+            <div class="spec-group">
+                <h4>Data Formats &amp; Storage</h4>
+                <div class="spec-item">
+                    <span class="spec-label">Waveform Archive</span>
+                    <span class="spec-value">Continuous miniSEED</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Local Storage</span>
+                    <span class="spec-value">Omega directory integration</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Historian DB</span>
+                    <span class="spec-value">SQLite3 (embedded)</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Configuration</span>
+                    <span class="spec-value">JSON / TOML</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Binary IPC Header</span>
+                    <span class="spec-value">32-byte fixed (f64 t₀, f32 fs/min/max, u32 npts)</span>
+                </div>
+            </div>
+
+            <div class="spec-group">
+                <h4>DSP Parameters</h4>
+                <div class="spec-item">
+                    <span class="spec-label">Polar. Window</span>
+                    <span class="spec-value">0.5 – 4 s (configurable)</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Polar. Threshold (R)</span>
+                    <span class="spec-value">0.0 – 1.0 (default 0.75)</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Δv/v Stack Window</span>
+                    <span class="spec-value">1-hour blocks, 24 h / 5-day</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">MASW Velocity Bins</span>
+                    <span class="spec-value">128 bins, 100 – 1500 m/s</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">HypoDD Convergence</span>
+                    <span class="spec-value">‖Δm‖₂ &lt; 0.1 m</span>
+                </div>
+            </div>
+
+            <div class="spec-group">
+                <h4>UI Modules</h4>
+
+                <div class="module-item">
+                    <div class="module-dot"></div>
+                    <div>
+                        <div class="module-name">Network Map</div>
+                        <div class="module-desc">MapLibre GL interactive station map; flyTo on selection; real-time status overlays.</div>
+                    </div>
+                </div>
+                <div class="module-item">
+                    <div class="module-dot"></div>
+                    <div>
+                        <div class="module-name">QC Matrix</div>
+                        <div class="module-desc">Per-station channel health grid; gap detection; latency and amplitude diagnostics.</div>
+                    </div>
+                </div>
+                <div class="module-item">
+                    <div class="module-dot"></div>
+                    <div>
+                        <div class="module-name">Helicorder</div>
+                        <div class="module-desc">24-hour drum plot with global peak Y-lock; automatic row ingestion; configurable gain.</div>
+                    </div>
+                </div>
+                <div class="module-item">
+                    <div class="module-dot"></div>
+                    <div>
+                        <div class="module-name">Canvas Waveform</div>
+                        <div class="module-desc">Zero-dependency HTML5 Canvas renderer; binary IPC; wheel/drag/pinch interactivity.</div>
+                    </div>
+                </div>
+                <div class="module-item">
+                    <div class="module-dot"></div>
+                    <div>
+                        <div class="module-name">Polarization</div>
+                        <div class="module-desc">3-C hodogram, azimuth compass, eigen metrics; P-wave pulse badge on trigger.</div>
+                    </div>
+                </div>
+                <div class="module-item">
+                    <div class="module-dot"></div>
+                    <div>
+                        <div class="module-name">Ambient Noise</div>
+                        <div class="module-desc">CCF daily stack plot; Δv/v timeline with configurable alert threshold banner.</div>
+                    </div>
+                </div>
+                <div class="module-item">
+                    <div class="module-dot"></div>
+                    <div>
+                        <div class="module-name">Event Catalog</div>
+                        <div class="module-desc">Phase picks, HypoDD relocation workspace, 3D Plotly modal; CSV/miniSEED export.</div>
+                    </div>
+                </div>
+                <div class="module-item">
+                    <div class="module-dot"></div>
+                    <div>
+                        <div class="module-name">Site Characterization</div>
+                        <div class="module-desc">MASW heatmapgl overtone, manual dispersion picking, Vs profile, NEHRP Vs30 badge.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="spec-group">
+                <h4>Environment &amp; Deployment</h4>
+                <div class="spec-item">
+                    <span class="spec-label">Target OS</span>
+                    <span class="spec-value">Windows 10 / 11</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Architecture</span>
+                    <span class="spec-value">x86_64 (.exe, .msi, NSIS)</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">App Data</span>
+                    <span class="spec-value">%APPDATA%\gaia-station-app</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Runtime Deps</span>
+                    <span class="spec-value">None (statically linked core)</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-label">Installer</span>
+                    <span class="spec-value">WiX MSI + NSIS bundled</span>
+                </div>
+            </div>
+
+            <div class="spec-group" style="margin-top:22px; border-top:1px solid var(--border); padding-top:14px;">
+                <div style="font-size:8pt; color:var(--muted); text-align:center; line-height:1.7;">
+                    Designed for structural health monitoring on<br>
+                    <strong style="color:var(--teal);">Linear Sensor Arrays &amp; High-Speed Rail</strong><br>
+                    <span style="font-size:7.5pt;">GaiaCode Limited — Encardio Rite Group</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

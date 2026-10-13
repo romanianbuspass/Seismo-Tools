@@ -1,0 +1,76 @@
+Σ Sigma
+
+[All Axes]
+GAIA SIGMA v2 (P)->GAIN 4g Invert Autocentre off
+All
+
+[North/South]
+GAIA SIGMA v2 (P)->GAIN 4g Invert Autocentre off
+North
+
+
+[East/West]
+GAIA SIGMA v2 (P)->GAIN 4g Invert Autocentre off
+East
+
+[Vertical]
+GAIA SIGMA v2 (P)->GAIN 4g Invert Autocentre off
+Vertical
+
+[Centre Mass]
+Centre Z
+
+
+[Show Mass]
+Masses: N0,E9,Z1
+
+[Motor (-)]
+<Masses: N3,E8,Z0
+10,123,126,108
+
+[Motor (+)]
+>Masses: N3,E8,Z0
+10,123,126,108
+
+[Zero Mass Pos]
+Saved ADC offset
+
+[Cal Enable ON]
+Remove button and command
+
+[Cal Enable OFF]
+Remove button and command
+
+[0.5g Gain]
+GAIA SIGMA v2 (P)->GAIN 0.5g Invert Autocentre off
+All
+
+[1g Gain]
+GAIA SIGMA v2 (P)->GAIN 1g Invert Autocentre off
+All
+
+[2g Gain]
+GAIA SIGMA v2 (P)->GAIN 2g Invert Autocentre off
+All
+
+[4g Gain]
+GAIA SIGMA v2 (P)->GAIN 4g Invert Autocentre off
+All
+
+[Sign-On Msg]
+GAIA SIGMA v2 (P)->GAIN 4g Invert Autocentre off
+All
+
+[Short Period]
+Remove button and command
+
+[Long Period]
+Remove button and command
+
+[Show Params]
+10,123,137,107
+
+[Print Title]
+Remove button and command
+
+

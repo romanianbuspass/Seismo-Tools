@@ -1,0 +1,73 @@
+Messages and responses: 
+
+We can ignore "Wake" & "Sleep" 
+
+[Sign on message]
+Wake
+GAIA Theta d (<SERIAL_NUMBER>)->Command All
+Mems: 0,0,0
+T P H: 0,00,0.0
+Mag: 0,0,0
+Sleep
+
+[All axes] 
+Command All
+
+[North/South]
+Command North
+
+[East/West]
+Command East
+
+[Vertical]
+Command Vertical
+
+[Centre Mass]
+c
+Centre North
+
+[Show Mass]
+mMasses: 1957,-1584,1985
+
+[Motor (-)]
+>>Masses: 1944,-1571,1977
+
+[Motor (+)]
+<<Masses: 1881,-1692,1932
+
+[CAL Enable ON]
+iCal On
+
+[CAL Enable OFF]
+kCal Off
+
+[Low Gain]
+gLow Gain
+
+
+[High Gain]
+hHigh Gain
+
+[sign-on msg]
+GAIA Theta d (<SERIAL_NUMBER>)->Command All
+Mems: 0,0,0
+T P H: 0,00,0.0
+Mag: 0,0,0
+
+[Short Period]
+sShort
+
+[Long Period]
+bLong
+
+[show params]
+dCentre Limits Low and High Gain 80,150,500
+North
+8,15,3,5,5,2000,2000,500,1111
+East
+8,15,3,5,5,2000,2000,500,1111
+Vertical
+8,15,3,5,5,2000,2000,500,1111
+
+
+

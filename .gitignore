@@ -1,0 +1,112 @@
+# Seismo Tools .gitignore
+
+## Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+## Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+## PyInstaller (keep *.spec — they are source configs)
+*.manifest
+
+## Binaries / compiled artifacts
+*.o
+*.obj
+*.elf
+*.bin
+*.exe
+*.dll
+*.dylib
+*.a
+
+## Logs
+*.log
+debug.log
+
+## Environment / secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+key.properties
+*.keystore
+*.jks
+upload-keystore.jks
+
+## OS / IDE
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+## Backups / temp
+*.bak
+*.backup
+*.tmp
+*.temp
+.cache/
+
+## Generated data outputs (sample/test fixtures are committed explicitly)
+*.csv
+*.tsv
+*.hdf5
+*.h5
+
+## Flutter / Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+**/android/local.properties
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/Flutter/ephemeral/
+**/macos/Flutter/ephemeral/
+**/windows/flutter/ephemeral/
+**/linux/flutter/ephemeral/
+build/
+
+## Android
+.gradle/
+local.properties
+**/android/app/debug
+**/android/app/profile
+**/android/app/release
+
+## iOS / macOS
+Pods/
+**/ios/Pods/
+**/ios/.symlinks/
+**/macos/Pods/
+xcuserdata/

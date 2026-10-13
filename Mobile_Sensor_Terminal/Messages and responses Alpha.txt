@@ -1,0 +1,68 @@
+α Alpha
+[All Axes]
+GAIA ALPHA v9/v1.9 S (<SERIAL_NUMBER>)->N UnLocked, E UnLocked, Z UnLocked, Command All
+
+[North/South]
+GAIA ALPHA v9/v1.9 S (<SERIAL_NUMBER>)->N UnLocked, E UnLocked, Z UnLocked, Command North
+
+[East/West]
+GAIA ALPHA v9/v1.9 S (<SERIAL_NUMBER>)->N UnLocked, E UnLocked, Z UnLocked, Command East
+
+[Vertical]
+GAIA ALPHA v9/v1.9 S (<SERIAL_NUMBER>)->N UnLocked, E UnLocked, Z UnLocked, Command Vertical
+
+[Centre Mass]
+Centre 
+ 
+[Show Mass]
+Masses: N-39,E23,Z88
+
+[Motor (-)]
+<<Masses: N-39,E23,Z88
+
+[Motor (+)]
+>>Masses: N-38,E23,Z88
+
+[Zero Mass Pos]
+
+[Cal Enable ON]
+Cal On
+
+[Cal Enable OFF]
+Cal Off
+
+[Low Gain]
+Remove button and command
+
+[High Gain]
+Remove button and command
+
+[Sign-On Msg]
+GAIA ALPHA v9/v1.9 S (<SERIAL_NUMBER>)->N UnLocked, E UnLocked, Z UnLocked, Command All
+
+[Short Period]
+Short
+
+[Long Period]
+Long
+
+[Show Params]
+Centre Limits Low and High Gain ParkNS ParkEW AC 50,150,1500,0,0,N
+North
+5,40,5,10,100,1500,1500,500,100,256,33,5,8,70,0,1110
+East
+5,40,5,10,100,1500,1500,500,100,256,29,5,8,70,0,1110
+Vertical
+5,30,5,10,200,1500,1500,500,200,3,3,500,20,1000,0,1110
+
+
+[Store Params]
+
+[Print Title]
+Remove button and command
+
+[Lock Axes]
+Lock
+
+[Unlock Axes]
+Unlock

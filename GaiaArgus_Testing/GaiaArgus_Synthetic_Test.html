@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaia-Argus Synthetic Test Traveler</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --surface2: #263245;
+            --border: #334155;
+            --teal: #0EADB2;
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px 40px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--teal);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .header-logos {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .wordmark {
+            height: 40px;
+        }
+
+        .icon-logo {
+            height: 40px;
+        }
+
+        h1 {
+            color: var(--teal);
+            margin: 0;
+            font-size: 24pt;
+        }
+
+        h2 {
+            color: var(--teal);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 5px;
+            margin-top: 40px;
+        }
+
+        h3 {
+            color: #fff;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+
+        .intro {
+            color: var(--muted);
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+
+        .test-block {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .setup-info {
+            background: var(--surface2);
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--teal);
+        }
+
+        .setup-info p {
+            margin: 5px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid var(--border);
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: var(--surface2);
+            color: var(--teal);
+        }
+
+        .col-checkbox {
+            width: 80px;
+            text-align: center;
+        }
+
+        .col-notes {
+            width: 40%;
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--teal);
+            cursor: pointer;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 60px;
+            background-color: var(--bg);
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 8px;
+            font-family: inherit;
+            resize: vertical;
+        }
+
+        textarea:focus {
+            outline: 1px solid var(--teal);
+        }
+
+        /* Print styles to ensure it looks good on physical paper */
+        @media print {
+            body {
+                background-color: #fff;
+                color: #000;
+                padding: 0;
+            }
+            .test-block {
+                page-break-inside: avoid;
+                background: #fff;
+                border: 1px solid #ccc;
+            }
+            .setup-info {
+                background: #f8f9fa;
+                border-left: 4px solid #000;
+            }
+            th {
+                background-color: #eee;
+                color: #000;
+            }
+            th, td {
+                border: 1px solid #ccc;
+            }
+            textarea {
+                border: none;
+                background: transparent;
+                resize: none;
+            }
+            h1, h2, h3 {
+                color: #000;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div>
+            <h1>Gaia-Argus Synthetic Testing</h1>
+            <p class="intro">This is a quick step by step guide for testing each module with synthetic signals.<br>Once each stage passes we will move onto testing with sensors.</p>
+        </div>
+        <div class="header-logo">
+            <img src="Gaiacode.png" alt="GaiaCode Wordmark" class="wordmark">
+        </div>
+    </div>
+
+    <!-- PHASE 1 -->
+    <h2>Phase 1: Data Intake and Core Visualization</h2>
+
+    <div class="test-block">
+        <h3>1. Data Ingestion & Live Waveform</h3>
+        <div class="setup-info">
+            <p><strong>Synthetic Input:</strong> Generate a 100 Hz, 3-component miniSEED file containing a pure 1 Hz sine wave with a known amplitude and a deliberate DC offset.</p>
+            <p><strong>Test Execution:</strong> Load the file via the offline miniSEED mode or the Omega Directory Watcher. Open the Live Waveform module.</p>
+        </div>
+        <table>
+            <tr>
+                <th>Expected Outcome</th>
+                <th class="col-checkbox">Pass/Fail</th>
+                <th class="col-notes">Actual Outcome / Notes</th>
+            </tr>
+            <tr>
+                <td>The Canvas Waveform renderer must display the loaded trace immediately.</td>
+                <td class="col-checkbox"><input type="checkbox"></td>
+                <td><textarea placeholder="Enter notes here..."></textarea></td>
+            </tr>
+            <tr>
+                <td>Applying the Box Select Mode and dragging across the sine wave should produce an Amplitude readout matching the synthetic input's known amplitude.</td>
+                <td class="col-checkbox"><input type="checkbox"></td>
+                <td><textarea placeholder="Enter notes here..."></textarea></td>
+            </tr>
+            <tr>
+                <td>The chart should enforce the render cap of 4,000 points per visible channel.</td>
+                <td class="col-checkbox"><input type="checkbox"></td>
+                <td><textarea placeholder="Enter notes here..."></textarea></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="test-block">
+        <h3>2. QC Matrix</h3>
+        <div class="setup-info">
+            <p><strong>Synthetic Input:</strong> A synthetic SeedLink stream where specific packets are intentionally dropped to create sequence discontinuities.</p>
+            <p><strong>Test Execution:</strong> Connect the stream and monitor the QC Matrix table. Toggle the Mute switch for the affected stream.</p>
+        </div>
+        <table>
+            <tr>
+                <th>Expected Outcome</th>
+                <th class="col-checkbox">Pass/Fail</th>
+                <th class="col-notes">Actual Outcome / Notes</th>
+            </tr>
+            <tr>
+                <td>The dropped packets must register on the Gap counter, changing the display to a red badge showing the number of gap events.</td>
+                <td class="col-checkbox"><input type="checkbox"></td>
+                <td><textarea placeholder="Enter notes here..."></textarea></td>
+            </tr>
+            <tr>
+                <td>Clicking the Mute toggle must change the status pill from Active to Muted (amber).</td>
+                <td class="col-checkbox"><input type="checkbox"></td>
+                <td><textarea placeholder="Enter notes here..."></textarea></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="test-block">
+        <h3>3. Helicorder</h3>
+        <div class="setup-info">
+            <p><strong>Synthetic Input:</strong> A 24-hour continuous synthetic background noise file punctuated by distinct, high-amplitude impulse spikes at known intervals.</p>
+            <p><strong>Test Execution:</strong> Load the file and navigate to the Helicorder view.</p>
+        </div>
+        <table>
+            <tr>
+                <th>Expected Outcome</th>
+                <th class="col-checkbox">Pass/Fail</th>
+                <th class="col-notes">Actual Outcome / Notes</th>
+            </tr>
+            <tr>
+                <td>The drum plot must show time advancing left to right within each row, wrapping to the next row below.</td>
+                <td class="col-checkbox"><input type="checkbox"></td>
+                <td><textarea placeholder="Enter notes here..."></textarea></td>
+            </tr>
+            <tr>
+                <td>The display must lock every row to the same Y-axis scale based on the global peak amplitude.</td>
+                <td class="col-checkbox"><input type="checkbox"></td>
+                <td><textarea placeholder="Enter notes here..."></textarea></td>
+            </tr>
+            <tr>
+                <td>The synthetic impulses must appear as sharp vertical deflections on the respective time rows.</td>
+                <td class="col-checkbox"><input type="checkbox"></td>
+                <td><textarea placeholder="Enter notes here..."></textarea></td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- PHASE 2 -->
+    <h2>Phase 2: Spatial and Wavefield Analysis</h2>
+
+    <div class="test-block">
+        <h3>4. Network Map & Polarization Analysis</h3>
+        <div class="setup-info">
+            <p><strong>Synthetic Input:</strong> A 3-component trace simulating a perfect linear P-wave (identical, in-phase sine waves on Z, N, and E) yielding a theoretical 45° back-azimuth and high rectilinearity. Ensure the synthetic PGA exceeds 0.02 g.</p>
+            <p><strong>Test Execution:</strong> Run the Polarization analysis with the rectilinearity threshold set to 0.7. Observe the Network Map.</p>
+        </div>
+        <table>
+            <tr>
+                <th>Expected Outcome</th>
+                <th class="col-checkbox">Pass/Fail</th>
+                <th class="col-notes">Actual Outcome / Notes</th>
+            </tr>
+            <tr>
+                <td>The Polarization module must report a Rectilinearity (R) approaching 1.0 (perfect linear P-wave) and trigger the P-WAVE TRIGGER badge.</td>
+                <td class="col-checkbox"><input type="checkbox"></td>
+                <td><textarea placeholder="Enter notes here..."></textarea></td>
+            </tr>
+            <tr>
+                <td>On the Network Map, the station marker must transition to an amber/red colour and pulse due to the > 0.02 g PGA.</td>
+                <td class="col-checkbox"><input type="checkbox"></td>
+                <td><textarea placeholder="Enter notes here..."></textarea></td>
+            </tr>
+            <tr>
+                <td>The Network Map must automatically draw a polyline vector from the station marker in the computed back-azimuth direction.</td>
+                <td class="col-checkbox"><input type="checkbox"></td>
+                <td><textarea placeholder="Enter notes here..."></textarea></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="test-block">
+        <h3>5. Orbit 3D</h3>
+        <div class="setup-info">
+            <p><strong>Synthetic Input:</strong> Use the same linear P-wave synthetic file from the Polarization test.</p>
+            <p><strong>Test Execution:</strong> Open the Orbit 3D module to visualize the 3-C displacement.</p>
+        </div>
+        <table>
+            <tr>
+                <th>Expected Outcome</th>
+                <th class="col-checkbox">Pass/Fail</th>
+                <th class="col-notes">Actual Outcome / Notes</th>
+            </tr>
+            <tr>
+                <td>The 3D scatter plot must render an elongated, needle-like trajectory aligned with the direction of propagation.</td>
+                <td class="col-checkbox"><input type="checkbox"></td>
+                <td><textarea placeholder="Enter notes here..."></textarea></td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- PHASE 3 -->
+    <h2>Phase 3: Spectral and Structural Analysis</h2>
+
+    <div class="test-block">
+        <h3>6. Response Spectra & Spectrogram</h3>
+        <div class="setup-info">
+            <p><strong>Synthetic Input:</strong> A synthetic sum of two pure sine waves (e.g., 2 Hz and 10 Hz) followed by a swept-sine (chirp) signal.</p>
+            <p><strong>Test Execution:</strong> Capture a snapshot in the Response Spectra module. Compute the Spectrogram using NFFT=256.</p>
+        </div>
+        <table>
+            <tr>
+                <th>Expected Outcome</th>
+                <th class="col-checkbox">Pass/Fail</th>
+                <th class="col-notes">Actual Outcome / Notes</th>
+            </tr>
+            <tr>
+                <td>The Response Spectra PSD plot must show sharp spectral peaks at exactly 2 Hz and 10 Hz.</td>
+                <td class="col-checkbox"><input type="checkbox"></td>
+                <td><textarea placeholder="Enter notes here..."></textarea></td>
+            </tr>
+            <tr>
+                <td>The Spectrogram heatmap must plot Frequency on the Y-axis and Time on the X-axis, displaying the chirp as a diagonal line across the time-frequency matrix.</td>
+                <td class="col-checkbox"><input type="checkbox"></td>
+                <td><textarea placeholder="Enter notes here..."></textarea></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="test-block">
+        <h3>7. Kinematics</h3>
+        <div class="setup-info">
+            <p><strong>Synthetic Input:</strong> A single sinusoidal acceleration pulse with a built-in DC offset.</p>
+            <p><strong>Test Execution:</strong> Observe the integrated velocity and displacement traces. Toggle the High-Pass (HP) filter.</p>
+        </div>
+        <table>
+            <tr>
+                <th>Expected Outcome</th>
+                <th class="col-checkbox">Pass/Fail</th>
+                <th class="col-notes">Actual Outcome / Notes</th>
+            </tr>
+            <tr>
+                <td>Without the HP filter, the DC offset must integrate into a ramping velocity signal.</td>
+                <td class="col-checkbox"><input type="checkbox"></td>
+                <td><textarea placeholder="Enter notes here..."></textarea></td>
+            </tr>
+            <tr>
+                <td>When the HP filter is enabled, the integration drift must be suppressed, returning the post-motion velocity baseline to flat.</td>
+                <td class="col-checkbox"><input type="checkbox"></td>
+                <td><textarea placeholder="Enter notes here..."></textarea></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="test-block">
+        <h3>8. OMA / FDD</h3>
+        <div class="setup-info">
+            <p><strong>Synthetic Input:</strong> Two channels of synthetic broadband noise, both filtered to contain a hidden, shared resonance peak at exactly 2.5 Hz.</p>
+            <p><strong>Test Execution:</strong> Run the FDD analysis with the FFT block size (nperseg) set to 1024.</p>
+        </div>
+        <table>
+            <tr>
+                <th>Expected Outcome</th>
+                <th class="col-checkbox">Pass/Fail</th>
+                <th class="col-notes">Actual Outcome / Notes</th>
+            </tr>
+            <tr>
+                <td>The SV1 curve (teal) on the FDD plot must show a distinct, isolated peak at 2.5 Hz.</td>
+                <td class="col-checkbox"><input type="checkbox"></td>
+                <td><textarea placeholder="Enter notes here..."></textarea></td>
+            </tr>
+            <tr>
+                <td>The Modal Properties Table must automatically detect and list this natural frequency alongside its half-power damping ratio.</td>
+                <td class="col-checkbox"><input type="checkbox"></td>
+                <td><textarea placeholder="Enter notes here..."></textarea></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="test-block">
+        <h3>9. HVSR</h3>
+        <div class="setup-info">
+            <p><strong>Synthetic Input:</strong> 3-component noise where the Z component has a spectral notch at 3 Hz, and the N/E components have corresponding peaks at 3 Hz.</p>
+            <p><strong>Test Execution:</strong> Assign the Z, N, and E streams and compute the HVSR.</p>
+        </div>
+        <table>
+            <tr>
+                <th>Expected Outcome</th>
+                <th class="col-checkbox">Pass/Fail</th>
+                <th class="col-notes">Actual Outcome / Notes</th>
+            </tr>
+            <tr>
+                <td>The H/V ratio spectrum (teal curve) must display a peak at the fundamental resonance frequency f_0 = 3 Hz.</td>
+                <td class="col-checkbox"><input type="checkbox"></td>
+                <td><textarea placeholder="Enter notes here..."></textarea></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="test-block">
+        <h3>10. Ambient Noise (Δv/v)</h3>
+        <div class="setup-info">
+            <p><strong>Synthetic Input:</strong> Generate two identical noise traces for the reference stack. For the subsequent "current" block, artificially shift one trace by a known time delay (δt).</p>
+            <p><strong>Test Execution:</strong> Process the reference block, then compute Δv/v using the shifted block. Set an Alert Threshold of -1.0%.</p>
+        </div>
+        <table>
+            <tr>
+                <th>Expected Outcome</th>
+                <th class="col-checkbox">Pass/Fail</th>
+                <th class="col-notes">Actual Outcome / Notes</th>
+            </tr>
+            <tr>
+                <td>The Δv/v Timeline must plot the calculated velocity change resulting from the time delay.</td>
+                <td class="col-checkbox"><input type="checkbox"></td>
+                <td><textarea placeholder="Enter notes here..."></textarea></td>
+            </tr>
+            <tr>
+                <td>If the computed change is equal to or more negative than the -1.0% threshold, the red alert banner must appear at the top of the module.</td>
+                <td class="col-checkbox"><input type="checkbox"></td>
+                <td><textarea placeholder="Enter notes here..."></textarea></td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- PHASE 4 -->
+    <h2>Phase 4: Event Refinement and Array Operations</h2>
+
+    <div class="test-block">
+        <h3>11. Event Catalog, Phase Picker & HypoDD</h3>
+        <div class="setup-info">
+            <p><strong>Synthetic Input:</strong> Inject two synthetic events into the SQLite historian with predefined P and S arrival times.</p>
+            <p><strong>Test Execution:</strong> Open the Phase Picker to drag the arrival markers. Select &ge;2 events in the Event Catalog and click "Run HypoDD".</p>
+        </div>
+        <table>
+            <tr>
+                <th>Expected Outcome</th>
+                <th class="col-checkbox">Pass/Fail</th>
+                <th class="col-notes">Actual Outcome / Notes</th>
+            </tr>
+            <tr>
+                <td>In the Phase Picker, dragging the pick lines must update the timestamp in real-time.</td>
+                <td class="col-checkbox"><input type="checkbox"></td>
+                <td><textarea placeholder="Enter notes here..."></textarea></td>
+            </tr>
+            <tr>
+                <td>The HypoDD solver must complete and automatically open a 3D Plotly modal showing the original hypocenters (faded markers) and relocated positions (solid markers).</td>
+                <td class="col-checkbox"><input type="checkbox"></td>
+                <td><textarea placeholder="Enter notes here..."></textarea></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="test-block">
+        <h3>12. Site Characterization (MASW)</h3>
+        <div class="setup-info">
+            <p><strong>Synthetic Input:</strong> A multi-channel synthetic surface wave record with known theoretical dispersion properties.</p>
+            <p><strong>Test Execution:</strong> Compute the MASW Image, click to pick the dispersion curve, and invert the picks.</p>
+        </div>
+        <table>
+            <tr>
+                <th>Expected Outcome</th>
+                <th class="col-checkbox">Pass/Fail</th>
+                <th class="col-notes">Actual Outcome / Notes</th>
+            </tr>
+            <tr>
+                <td>The dispersion energy image must render as a frequency vs. phase-velocity heatmap.</td>
+                <td class="col-checkbox"><input type="checkbox"></td>
+                <td><textarea placeholder="Enter notes here..."></textarea></td>
+            </tr>
+            <tr>
+                <td>The inversion must plot a layered-earth Vs depth profile as a step function.</td>
+                <td class="col-checkbox"><input type="checkbox"></td>
+                <td><textarea placeholder="Enter notes here..."></textarea></td>
+            </tr>
+            <tr>
+                <td>The module must display the appropriate NEHRP site class badge based on the computed Vs30.</td>
+                <td class="col-checkbox"><input type="checkbox"></td>
+                <td><textarea placeholder="Enter notes here..."></textarea></td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+</html>
